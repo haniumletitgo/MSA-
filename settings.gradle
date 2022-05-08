@@ -1,8 +1,0 @@
-rootProject.name = 'msastock'
-include 'member'
-include 'trade'
-include 'stock'
-include 'eureka'
-include 'gateway'
-include 'utils'
-
