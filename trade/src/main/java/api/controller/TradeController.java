@@ -1,5 +1,8 @@
 package api.controller;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
@@ -17,7 +20,26 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class TradeController {
 
+    /**
+     * id로 단건 조회
+     * @param id
+     * @return
+     */
+    @GetMapping("/trades/{id}")
+    public TradeDto findOne(@PathVariable("id") Long id) {
+        //Trade trade = tradeService.findById(id);
+        return new TradeDto();
+    }
 
+    /**
+     * 전체 조회
+     * @return
+     */
+    @GetMapping("/trades")
+    public ResponseList<ArrayList<TradeDto>> findAll() {
+        //Trade trade = tradeService.findAll();
+        return new ResponseList<ArrayList<TradeDto>>(0, new ArrayList<>());
+    }
 
     /**
      * 호가 등록(매도, 매수)
@@ -61,7 +83,19 @@ public class TradeController {
 
     @Data
     @AllArgsConstructor
+    static class ResponseList<T> {
+        int count;
+        T data;
+    }
 
+    @Data
+    @AllArgsConstructor
+    static class TradeDto {
+
+    }
+
+    @Data
+    @AllArgsConstructor
     static class BidOrAskRequest {
 
     }
