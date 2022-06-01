@@ -15,12 +15,23 @@ public class TradeController {
 
 
 
+    /**
+     * 호가 수정
+     * @param id
+     * @param request
+     * @return
+     */
     @PutMapping("/trade/{id}")
     public UpdateTradeResponse updateTrade(@PathVariable("id") Long id, @RequestBody UpdateTradeRequest request) {
         //tradeService.overwriteTrade(request.toEntity);
         return new UpdateTradeResponse(id);
     }
 
+    /**
+     * 호가 취소
+     * @param id
+     * @return
+     */
     @DeleteMapping("/trade/{id}")
     public DeleteTradeResponse deleteTrade(@PathVariable("id") Long id) {
         //Long deleteId = tradeService.delete(id);
