@@ -23,6 +23,7 @@ public class TradeController {
 
     /**
      * id로 단건 조회
+     *
      * @param id
      * @return
      */
@@ -34,6 +35,7 @@ public class TradeController {
 
     /**
      * 전체 조회
+     *
      * @return
      */
     @GetMapping("/trades")
@@ -42,8 +44,10 @@ public class TradeController {
         return new ResponseList<ArrayList<TradeDto>>(0, new ArrayList<>());
     }
 
+
     /**
      * 특정 맴버 시간기준 페이지 조회
+     *
      * @param memberId
      * @param sortRule
      * @param limit
@@ -57,14 +61,26 @@ public class TradeController {
         @RequestParam(value = "sort", defaultValue = "time:asc") String sortRule,
         @RequestParam(value = "limit", defaultValue = "20") String limit,
         @RequestParam(value = "offset", defaultValue = "0") Integer offset,
-        @RequestParam(value = "transaction_type", defaultValue = "") String transactionTypeFilter)  {
+        @RequestParam(value = "transaction_type", defaultValue = "") String transactionTypeFilter) {
 
         return new ResponseList<>(0, new ArrayList<>());
     }
 
     /**
-     * 호가 등록(매도, 매수)
-     * 예약 개념은 없다고 가정.
+     * 유효한 매수, 매도 호가 (가격, 개수)반환
+     * @param orderId
+     * @return
+     */
+    @GetMapping("/orders/{id}/trades")
+    public ResponseList<ArrayList<FindByOrderAndAggreagationResponse>> findByOrderAndAggregation(
+        @PathVariable("id") Long orderId) {
+
+        return new ResponseList<>(0, new ArrayList<>());
+    }
+
+    /**
+     * 호가 등록(매도, 매수) 예약 개념은 없다고 가정.
+     *
      * @param request
      * @return
      */
@@ -81,18 +97,21 @@ public class TradeController {
 
     /**
      * 호가 수정
+     *
      * @param id
      * @param request
      * @return
      */
     @PutMapping("/trades/{id}")
-    public UpdateTradeResponse updateTrade(@PathVariable("id") Long id, @RequestBody UpdateTradeRequest request) {
+    public UpdateTradeResponse updateTrade(@PathVariable("id") Long id,
+        @RequestBody UpdateTradeRequest request) {
         //tradeService.overwriteTrade(request.toEntity);
         return new UpdateTradeResponse(id);
     }
 
     /**
      * 호가 취소
+     *
      * @param id
      * @return
      */
@@ -105,15 +124,22 @@ public class TradeController {
     @Data
     @AllArgsConstructor
     static class FindByMemberAndPageResponse {
+
+    }
+
+    @Data
+    @AllArgsConstructor
+    static class FindByOrderAndAggreagationResponse {
+
     }
 
     @Data
     @AllArgsConstructor
     static class ResponseList<T> {
+
         int count;
         T data;
     }
-
 
 
     @Data
@@ -131,13 +157,14 @@ public class TradeController {
     @Data
     @AllArgsConstructor
     static class BidOrAskResponse {
-    }
 
+    }
 
 
     @Data
     @AllArgsConstructor
     static class UpdateTradeRequest {
+
         Long tradeId;
         //entity내용과 일치
     }
@@ -145,12 +172,14 @@ public class TradeController {
     @Data
     @AllArgsConstructor
     static class UpdateTradeResponse {
+
         Long tradeId;
     }
 
     @Data
     @AllArgsConstructor
     static class DeleteTradeResponse {
+
         Long tradeId;
     }
 
