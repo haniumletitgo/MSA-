@@ -70,7 +70,7 @@ public class TradeController {
         @RequestParam(value = "sort", defaultValue = "time:asc") String sortRule,
         @RequestParam(value = "limit", defaultValue = "20") String limit,
         @RequestParam(value = "offset", defaultValue = "0") Integer offset,
-        @RequestParam(value = "transaction_type", defaultValue = "") TradeType tradeType) {
+        @RequestParam(value = "trade_type", defaultValue = "") TradeType tradeType) {
 
         return new ResponseList<>(0, new ArrayList<>());
     }
