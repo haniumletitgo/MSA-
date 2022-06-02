@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -39,6 +40,26 @@ public class TradeController {
     public ResponseList<ArrayList<TradeDto>> findAll() {
         //Trade trade = tradeService.findAll();
         return new ResponseList<ArrayList<TradeDto>>(0, new ArrayList<>());
+    }
+
+    /**
+     * 특정 맴버 시간기준 페이지 조회
+     * @param memberId
+     * @param sortRule
+     * @param limit
+     * @param offset
+     * @param transactionTypeFilter
+     * @return
+     */
+    @GetMapping("/members/{id}/trades")
+    public ResponseList<ArrayList<FindByMemberAndPageResponse>> findByMemberAndPage(
+        @PathVariable("id") Long memberId,
+        @RequestParam(value = "sort", defaultValue = "time:asc") String sortRule,
+        @RequestParam(value = "limit", defaultValue = "20") String limit,
+        @RequestParam(value = "offset", defaultValue = "0") Integer offset,
+        @RequestParam(value = "transaction_type", defaultValue = "") String transactionTypeFilter)  {
+
+        return new ResponseList<>(0, new ArrayList<>());
     }
 
     /**
@@ -83,10 +104,17 @@ public class TradeController {
 
     @Data
     @AllArgsConstructor
+    static class FindByMemberAndPageResponse {
+    }
+
+    @Data
+    @AllArgsConstructor
     static class ResponseList<T> {
         int count;
         T data;
     }
+
+
 
     @Data
     @AllArgsConstructor
