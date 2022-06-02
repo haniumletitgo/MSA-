@@ -113,7 +113,7 @@ public class TradeController {
      */
     @PatchMapping("/trades/{id}")
     public PatchTradeResponse patchTrade(@PathVariable("id") Long id,
-        @RequestBody @Valid List<PatchTradeRequest> request) {
+        @RequestBody List<@Valid  PatchTradeRequest> request) {
         //tradeService.overwriteTrade(request.toEntity);
         return new PatchTradeResponse(id);
     }
