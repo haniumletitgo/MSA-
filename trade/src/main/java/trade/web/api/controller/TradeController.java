@@ -1,14 +1,18 @@
 package trade.web.api.controller;
 
 import java.lang.reflect.Array;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import trade.domain.TradeType;
 
 @RestController
 @RequestMapping("/api")
@@ -102,11 +107,11 @@ public class TradeController {
      * @param request
      * @return
      */
-    @PutMapping("/trades/{id}")
-    public UpdateTradeResponse updateTrade(@PathVariable("id") Long id,
-        @RequestBody UpdateTradeRequest request) {
+    @PatchMapping("/trades/{id}")
+    public PatchTradeResponse patchTrade(@PathVariable("id") Long id,
+        @RequestBody List<PatchTradeRequest> request) {
         //tradeService.overwriteTrade(request.toEntity);
-        return new UpdateTradeResponse(id);
+        return new PatchTradeResponse(id);
     }
 
     /**
@@ -143,14 +148,30 @@ public class TradeController {
 
 
     @Data
-    @AllArgsConstructor
     static class TradeDto {
+        Long tradeId;
+        Long stockId;
+        Long memberId;
+        TradeType tradeType;
+        Long price;
+        int amount;
+        int availableAmount;
+        LocalDateTime createdAt;
 
     }
 
     @Data
     @AllArgsConstructor
     static class BidOrAskRequest {
+
+        @NotNull
+        Long stockId;
+        @NotNull
+        Long price;
+        @NotNull
+        Integer amount;
+        @NotNull
+        TradeType tradeType;
 
     }
 
@@ -163,15 +184,15 @@ public class TradeController {
 
     @Data
     @AllArgsConstructor
-    static class UpdateTradeRequest {
-
-        Long tradeId;
-        //entity내용과 일치
+    static class PatchTradeRequest {
+        String op;
+        String field;
+        String value;
     }
 
     @Data
     @AllArgsConstructor
-    static class UpdateTradeResponse {
+    static class PatchTradeResponse {
 
         Long tradeId;
     }
