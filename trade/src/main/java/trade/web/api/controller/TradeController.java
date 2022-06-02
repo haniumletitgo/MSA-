@@ -4,11 +4,14 @@ import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -91,7 +94,7 @@ public class TradeController {
      * @return
      */
     @PostMapping("/trades")
-    public ResponseEntity<BidOrAskResponse> bidOrAsk(@RequestBody BidOrAskRequest request) {
+    public ResponseEntity<BidOrAskResponse> bidOrAsk(@RequestBody @Valid BidOrAskRequest request) {
         //1. 매도 혹은 매수 인지 파악
         //2. 매도 혹은 매수 가능 여부 파악
         //3. 2. 에서 불가능 하다면 불가능 이유 return
@@ -110,7 +113,7 @@ public class TradeController {
      */
     @PatchMapping("/trades/{id}")
     public PatchTradeResponse patchTrade(@PathVariable("id") Long id,
-        @RequestBody List<PatchTradeRequest> request) {
+        @RequestBody @Valid List<PatchTradeRequest> request) {
         //tradeService.overwriteTrade(request.toEntity);
         return new PatchTradeResponse(id);
     }
@@ -127,7 +130,8 @@ public class TradeController {
         return new DeleteTradeResponse(id);
     }
 
-    @Data
+    @Getter
+    @Setter
     @AllArgsConstructor
     static class FindByMemberAndPageResponse {
 
@@ -142,7 +146,8 @@ public class TradeController {
 
     }
 
-    @Data
+    @Getter
+    @Setter
     @AllArgsConstructor
     static class FindByOrderAndAggreagationResponse {
         Long stockName;
@@ -151,7 +156,8 @@ public class TradeController {
         int availableAmount;
     }
 
-    @Data
+    @Getter
+    @Setter
     @AllArgsConstructor
     static class ResponseList<T> {
 
@@ -160,7 +166,8 @@ public class TradeController {
     }
 
 
-    @Data
+    @Getter
+    @Setter
     static class TradeDto {
         Long tradeId;
         Long stockId;
@@ -173,7 +180,8 @@ public class TradeController {
 
     }
 
-    @Data
+    @Getter
+    @Setter
     @AllArgsConstructor
     static class BidOrAskRequest {
 
@@ -188,14 +196,16 @@ public class TradeController {
 
     }
 
-    @Data
+    @Getter
+    @Setter
     @AllArgsConstructor
     static class BidOrAskResponse {
 
     }
 
 
-    @Data
+    @Getter
+    @Setter
     @AllArgsConstructor
     static class PatchTradeRequest {
         @NotNull
@@ -214,14 +224,16 @@ public class TradeController {
         String value;
     }
 
-    @Data
+    @Getter
+    @Setter
     @AllArgsConstructor
     static class PatchTradeResponse {
 
         Long tradeId;
     }
 
-    @Data
+    @Getter
+    @Setter
     @AllArgsConstructor
     static class DeleteTradeResponse {
 
