@@ -1,4 +1,4 @@
-package api.controller;
+package trade.web.api.controller;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
