@@ -4,6 +4,8 @@ import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -57,7 +59,7 @@ public class TradeController {
      * @param sortRule
      * @param limit
      * @param offset
-     * @param transactionTypeFilter
+     * @param tradeType
      * @return
      */
     @GetMapping("/members/{id}/trades")
@@ -66,7 +68,7 @@ public class TradeController {
         @RequestParam(value = "sort", defaultValue = "time:asc") String sortRule,
         @RequestParam(value = "limit", defaultValue = "20") String limit,
         @RequestParam(value = "offset", defaultValue = "0") Integer offset,
-        @RequestParam(value = "transaction_type", defaultValue = "") String transactionTypeFilter) {
+        @RequestParam(value = "transaction_type", defaultValue = "") TradeType tradeType) {
 
         return new ResponseList<>(0, new ArrayList<>());
     }
@@ -130,12 +132,24 @@ public class TradeController {
     @AllArgsConstructor
     static class FindByMemberAndPageResponse {
 
+        Long tradeId;
+        Long stockId;
+        Long stockName;
+        TradeType tradeType;
+        Long price;
+        int amount;
+        int availableAmount;
+        LocalDateTime createdAt;
+
     }
 
     @Data
     @AllArgsConstructor
     static class FindByOrderAndAggreagationResponse {
-
+        Long stockName;
+        TradeType tradeType;
+        Long price;
+        int availableAmount;
     }
 
     @Data
@@ -185,8 +199,19 @@ public class TradeController {
     @Data
     @AllArgsConstructor
     static class PatchTradeRequest {
+        @NotNull
+        @NotBlank
+        @NotEmpty
         String op;
+
+        @NotNull
+        @NotBlank
+        @NotEmpty
         String field;
+
+        @NotNull
+        @NotBlank
+        @NotEmpty
         String value;
     }
 
