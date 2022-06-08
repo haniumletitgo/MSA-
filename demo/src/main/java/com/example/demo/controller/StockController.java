@@ -23,7 +23,7 @@ public class StockController {
     /*전체 주식 정보 조회*/
     @GetMapping
     public String stocks(Model model){
-        List<Stock> stocks = StockController.findAll();
+        List<Stock> stocks = StockController.find
         model.addAttribute("stocks", stocks);
         return "api/stocks";
     }
@@ -42,17 +42,16 @@ public class StockController {
         return "api/stock";
     }
 
-    /*특정기간 거래량 top 10*/
+    /*특정기간 거래량 top 10*/ /*특정기간 수익 증감량 top 10*/
     @GetMapping("/{stockId}/more")
-    public String stocks(Model model){
+    public String moreStock(Model model){
         return "api/stocks/{stockId}/more";
     }
-
-    /*특정기간 수익 증감량 top 10*/
     @GetMapping("/{stockId}/higher")
-    public String stocks(Model model){
+    public String higherStock(Model model){
         return "api /stocks/{stockId}/higher";
     }
+
 
     /*주식 정보 생성*/
     @PostMapping("/add")
@@ -62,7 +61,7 @@ public class StockController {
 
     /*주식 정보 수정*/
     @PostMapping("/{stockId}/edit")
-    public String edit(@PathVariable Long itemId, @ModelAttribute Stock stock) {
+    public String edit(@PathVariable Long stockId, @ModelAttribute Stock stock) {
         StockRepository.update(stockId, stock);
         return "redirect:/basic/stocks/{stockId}";
         //(뷰 템플릿을 호출하는 대신에) 상품 상세 화면으로 이동하도록 리다이렉트를 호출

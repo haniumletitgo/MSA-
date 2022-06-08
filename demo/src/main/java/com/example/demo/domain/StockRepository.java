@@ -18,7 +18,7 @@ public class StockRepository {
         return stock;
     }
 
-    public Stock findById(Long id){      //조회
+    public static Stock findById(Long id){      //조회
         return store.get(id);
     }
 
@@ -26,7 +26,7 @@ public class StockRepository {
         return new ArrayList<>(store.values());
     }
 
-    public void update(Long stockId, Stock updateParam){
+    public static void update(Long stockId, Stock updateParam){
         Stock findStock=findById(stockId);
         findStock.setStockName(updateParam.getStockName());
         findStock.setCurrentPrice(updateParam.getCurrentPrice());
