@@ -14,6 +14,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
+
     private ApiInfo commonInfo() {
         return new ApiInfoBuilder()
                 .title("User Api")
@@ -22,14 +23,12 @@ public class SwaggerConfig {
     }
 
     @Bean
-    public Docket allApi() {
+    public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("USER")
-                .useDefaultResponseMessages(false)
                 .select()
-                .apis(RequestHandlerSelectors.any())
-                .paths(PathSelectors.any())
-                .build()
-                .apiInfo(commonInfo());
+                .apis(RequestHandlerSelectors.any()) // 현재 RequestMapping으로 할당된 모든 URL 리스트를 추출
+                .paths(PathSelectors.ant("/api/**")) // 그중 /api/** 인 URL들만 필터링
+                .build();
     }
+
 }
