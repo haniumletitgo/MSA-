@@ -43,13 +43,13 @@ public class StockController {
     }
 
     /*특정기간 거래량 top 10*/
-    @GetMapping
+    @GetMapping("/{stockId}/more")
     public String stocks(Model model){
         return "api/stocks/{stockId}/more";
     }
 
     /*특정기간 수익 증감량 top 10*/
-    @GetMapping
+    @GetMapping("/{stockId}/higher")
     public String stocks(Model model){
         return "api /stocks/{stockId}/higher";
     }
@@ -61,6 +61,12 @@ public class StockController {
     }
 
     /*주식 정보 수정*/
+    @PostMapping("/{stockId}/edit")
+    public String edit(@PathVariable Long itemId, @ModelAttribute Stock stock) {
+        StockRepository.update(stockId, stock);
+        return "redirect:/basic/stocks/{stockId}";
+        //(뷰 템플릿을 호출하는 대신에) 상품 상세 화면으로 이동하도록 리다이렉트를 호출
+    }
 
     /*주식 정보 삭제*/
 }

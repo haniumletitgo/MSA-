@@ -13,8 +13,8 @@ public class StockRepository {
     private static  long sequence=0L;
 
     public Stock save(Stock stock){    //상품 저장 기능
-        stock.setId(++sequence);
-        store.put(item.getId(), stock);
+        stock.setStockId(++sequence);
+        store.put(stock.getStockId(), stock);
         return stock;
     }
 
@@ -26,11 +26,11 @@ public class StockRepository {
         return new ArrayList<>(store.values());
     }
 
-    public void update(Long StockId, Stock updateParam){
-        Stock findStock=findById(StockId);
+    public void update(Long stockId, Stock updateParam){
+        Stock findStock=findById(stockId);
         findStock.setStockName(updateParam.getStockName());
-        findStock.setPrice(updateParam.getPrice());
-        findStock.setQuantity(updateParam.getQuantity());
+        findStock.setCurrentPrice(updateParam.getCurrentPrice());
+        findStock.setVolume(updateParam.getVolume());
     }
 
     public void clearStore(){
