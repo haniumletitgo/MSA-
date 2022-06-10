@@ -18,8 +18,8 @@ public class StockRepository {
         return stock;
     }
 
-    public static Stock findById(Long id){      //조회
-        return store.get(id);
+    public static Stock findById(Long stockId){      //조회
+        return store.get(stockId);
     }
 
     public List<Stock> findAll(){        //전체 조회
