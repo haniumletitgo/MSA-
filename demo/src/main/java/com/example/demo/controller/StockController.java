@@ -40,7 +40,6 @@ public class StockController {
     @GetMapping("/{stockId}")
     public String stock(@PathVariable long stockId, Model model){
         Stock stock = stockRepository.findById(stockId);
-        //PathVariable 로 넘어온 itemId로 item 조회
         model.addAttribute("stock", stock);
         return "api/stock";
     }
@@ -59,15 +58,14 @@ public class StockController {
     /*주식 정보 생성*/
     @PostMapping("/add")
     public String addStock() {
-        return "redirect:/api/stocks/{stockId}";
+        return "api/stocks/{stockId}";
     }
 
     /*주식 정보 수정*/
     @PostMapping("/{stockId}/edit")
     public String edit(@PathVariable Long stockId, @ModelAttribute Stock stock) {
         StockRepository.update(stockId, stock);
-        return "redirect:/api/stocks/{stockId}";
-        //(뷰 템플릿을 호출하는 대신에) 상품 상세 화면으로 이동하도록 리다이렉트를 호출
+        return "api/stocks/{stockId}/edit";
     }
 
     /*주식 정보 삭제*/
