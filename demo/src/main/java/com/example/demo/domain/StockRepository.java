@@ -32,7 +32,6 @@ public class StockRepository {
         findStock.setCurrentPrice(updateParam.getCurrentPrice());
         findStock.setVolume(updateParam.getVolume());
     }
-
     public void clearStore(){
         store.clear();
     }

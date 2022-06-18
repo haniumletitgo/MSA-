@@ -28,7 +28,6 @@ public class StockController {
         return "api/stocks";
     }
 
-
     /*주식 상세정보 조회
     * - 기업 정보
         - 업종

@@ -8,7 +8,6 @@ import java.util.Date;
 @Getter
 @Setter
 public class Stock {
-
     private Long stockId;
     private String stockName;
     private String category;    //업종

@@ -14,7 +14,6 @@ import springfox.documentation.spring.web.plugins.Docket;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
-
     private ApiInfo commonInfo() {
         return new ApiInfoBuilder()
                 .title("User Api")
