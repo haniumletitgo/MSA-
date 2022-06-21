@@ -3,7 +3,7 @@ package com.example.demo.domain;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 
 @Getter
@@ -14,7 +14,7 @@ public class Stock {
     private String category;    //업종
 
     private float currentPrice; //현재가
-    private long time;
+    private Timestamp time;
 
     //당일기준
     private float highPrice;    //최고가
@@ -27,7 +27,7 @@ public class Stock {
     public Stock(){
     }
 
-    public Stock(String stockName, String category, float currentPrice, long time, float highPrice, float lowPrice, long volume, float totalPrice, float capitalization) {
+    public Stock(String stockName, String category, float currentPrice, Timestamp time, float highPrice, float lowPrice, long volume, float totalPrice, float capitalization) {
         this.stockName = stockName;
         this.category = category;
         this.currentPrice = currentPrice;
