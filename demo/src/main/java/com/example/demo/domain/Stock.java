@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import java.util.Date;
 
+
 @Getter
 @Setter
 public class Stock {
@@ -26,8 +27,7 @@ public class Stock {
     public Stock(){
     }
 
-    public Stock(Long stockId, String stockName, String category, float currentPrice, long time, float highPrice, float lowPrice, long volume, float totalPrice, float capitalization) {
-        this.stockId = stockId;
+    public Stock(String stockName, String category, float currentPrice, long time, float highPrice, float lowPrice, long volume, float totalPrice, float capitalization) {
         this.stockName = stockName;
         this.category = category;
         this.currentPrice = currentPrice;
