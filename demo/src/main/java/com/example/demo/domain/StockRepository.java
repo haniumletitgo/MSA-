@@ -18,12 +18,13 @@ public class StockRepository {
         return stock;
     }
 
-
     public static Stock findById(Long stockId){      //조회
+
         return store.get(stockId);
     }
 
     public List<Stock> findAll(){        //전체 조회
+
         return new ArrayList<>(store.values());
     }
 
@@ -32,7 +33,14 @@ public class StockRepository {
         findStock.setStockName(updateParam.getStockName());
         findStock.setCurrentPrice(updateParam.getCurrentPrice());
         findStock.setVolume(updateParam.getVolume());
+        findStock.setCapitalization(updateParam.getCapitalization());
+        findStock.setCategory(updateParam.getCategory());
+        findStock.setHighPrice(updateParam.getHighPrice());
+        findStock.setLowPrice(updateParam.getLowPrice());
+        findStock.setTime(updateParam.getTime());
+        findStock.setTotalPrice(updateParam.getTotalPrice());
     }
+
     public void clearStore(){
         store.clear();
     }
